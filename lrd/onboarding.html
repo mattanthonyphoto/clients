@@ -145,12 +145,39 @@
   }
 
   .checkbox {
-    width: 20px;
-    height: 20px;
+    display: none;
+  }
+
+  .checkbox-label {
+    width: 22px;
+    height: 22px;
     border: 2px solid #D9D5CD;
     border-radius: 4px;
     flex-shrink: 0;
     margin-top: 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .checkbox:checked + .checkbox-label {
+    background: #1A1A18;
+    border-color: #1A1A18;
+  }
+
+  .checkbox:checked + .checkbox-label::after {
+    content: '\2713';
+    color: #F6F4F0;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .checkbox:checked ~ .step-content {
+    opacity: 0.45;
+    text-decoration: line-through;
+    text-decoration-color: #D9D5CD;
   }
 
   .step-content {
@@ -366,26 +393,26 @@
     </div>
     <ul class="steps">
       <li class="step">
-        <div class="checkbox"></div>
+        <input type="checkbox" class="checkbox" id="cb1"><label for="cb1" class="checkbox-label"></label>
         <div class="step-content">
           Log into your Squarespace dashboard at <strong>lrdstudio.ca</strong>
         </div>
       </li>
       <li class="step">
-        <div class="checkbox"></div>
+        <input type="checkbox" class="checkbox" id="cb2"><label for="cb2" class="checkbox-label"></label>
         <div class="step-content">
           Navigate to:
           <br><span class="step-path">Settings &rarr; Permissions &amp; Ownership &rarr; Invite Contributor</span>
         </div>
       </li>
       <li class="step">
-        <div class="checkbox"></div>
+        <input type="checkbox" class="checkbox" id="cb3"><label for="cb3" class="checkbox-label"></label>
         <div class="step-content">
           Enter <strong>info@mattanthonyphoto.com</strong> and set the role to <strong>Administrator</strong>
         </div>
       </li>
       <li class="step">
-        <div class="checkbox"></div>
+        <input type="checkbox" class="checkbox" id="cb4"><label for="cb4" class="checkbox-label"></label>
         <div class="step-content">
           Click <strong>Send Invite</strong>
           <div class="step-note">You stay the site owner — I just get backend access for the rebuild.</div>
@@ -414,27 +441,27 @@
 
     <ul class="steps" style="margin-top: 16px;">
       <li class="step">
-        <div class="checkbox"></div>
+        <input type="checkbox" class="checkbox" id="cb5"><label for="cb5" class="checkbox-label"></label>
         <div class="step-content">
           Click the link above and create your Zernio account using <strong>lauren@lrdstudio.ca</strong>
         </div>
       </li>
       <li class="step">
-        <div class="checkbox"></div>
+        <input type="checkbox" class="checkbox" id="cb6"><label for="cb6" class="checkbox-label"></label>
         <div class="step-content">
           Once logged in, click <strong>"Add Account"</strong> and connect <strong>Instagram</strong>
           <div class="step-note">Log in with the Meta account that manages @lrdstudio_interiors. You'll authorize read + publish access.</div>
         </div>
       </li>
       <li class="step">
-        <div class="checkbox"></div>
+        <input type="checkbox" class="checkbox" id="cb7"><label for="cb7" class="checkbox-label"></label>
         <div class="step-content">
           Click <strong>"Add Account"</strong> again and connect <strong>Pinterest</strong>
           <div class="step-note">Pinterest acts as a passive SEO engine for your projects — every pin links back to your site.</div>
         </div>
       </li>
       <li class="step">
-        <div class="checkbox"></div>
+        <input type="checkbox" class="checkbox" id="cb8"><label for="cb8" class="checkbox-label"></label>
         <div class="step-content">
           Click <strong>"Add Account"</strong> again and connect <strong>Google Business Profile</strong>
           <div class="step-note">If you haven't claimed your GBP yet, that's fine — let me know and I'll walk you through it.</div>
@@ -448,26 +475,26 @@
 
     <ul class="steps">
       <li class="step">
-        <div class="checkbox"></div>
+        <input type="checkbox" class="checkbox" id="cb9"><label for="cb9" class="checkbox-label"></label>
         <div class="step-content">
           Go to <strong>business.facebook.com</strong> and log in
         </div>
       </li>
       <li class="step">
-        <div class="checkbox"></div>
+        <input type="checkbox" class="checkbox" id="cb10"><label for="cb10" class="checkbox-label"></label>
         <div class="step-content">
           Navigate to:
           <br><span class="step-path">Settings &rarr; People &rarr; Add People</span>
         </div>
       </li>
       <li class="step">
-        <div class="checkbox"></div>
+        <input type="checkbox" class="checkbox" id="cb11"><label for="cb11" class="checkbox-label"></label>
         <div class="step-content">
           Enter <strong>info@mattanthonyphoto.com</strong> and grant <strong>Admin access</strong>
         </div>
       </li>
       <li class="step">
-        <div class="checkbox"></div>
+        <input type="checkbox" class="checkbox" id="cb12"><label for="cb12" class="checkbox-label"></label>
         <div class="step-content">
           Click <strong>Send Invite</strong>
           <div class="step-note">This doesn't give me access to your personal Facebook — only the business assets connected to @lrdstudio_interiors.</div>
@@ -488,14 +515,14 @@
     </div>
     <ul class="steps">
       <li class="step">
-        <div class="checkbox"></div>
+        <input type="checkbox" class="checkbox" id="cb13"><label for="cb13" class="checkbox-label"></label>
         <div class="step-content">
           Pick <strong>5-10 projects</strong> for the new website portfolio
           <div class="step-note">Include any that are in progress if you'd like them on the site when they're done.</div>
         </div>
       </li>
       <li class="step">
-        <div class="checkbox"></div>
+        <input type="checkbox" class="checkbox" id="cb14"><label for="cb14" class="checkbox-label"></label>
         <div class="step-content">
           Think about any <strong>upcoming projects</strong> in the next 3 months we should plan a shoot around
         </div>
@@ -526,7 +553,7 @@
 
     <ul class="steps" style="margin-top: 20px;">
       <li class="step">
-        <div class="checkbox"></div>
+        <input type="checkbox" class="checkbox" id="cb15"><label for="cb15" class="checkbox-label"></label>
         <div class="step-content">
           Log in at <strong>portal.mattanthonyphoto.com</strong> and confirm you can see your dashboard
         </div>
