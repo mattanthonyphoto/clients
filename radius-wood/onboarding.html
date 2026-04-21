@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radius Architectural Millwork — Onboarding Checklist</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:wght@400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    color: #2B2420;
+    background: #fff;
+    line-height: 1.6;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  @page { size: letter; margin: 0.6in 0.7in; }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 0;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #E8E1D6;
+  }
+
+  .header-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #8B6F4E;
+    margin-bottom: 12px;
+  }
+
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: #2B2420;
+    margin-bottom: 8px;
+  }
+
+  .header p {
+    font-size: 14px;
+    color: #8A7E6E;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .intro {
+    background: #F4EFE8;
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 36px;
+    font-size: 14px;
+    color: #4A4038;
+    line-height: 1.7;
+  }
+
+  .intro strong { color: #2B2420; }
+
+  .section {
+    margin-bottom: 36px;
+    page-break-inside: avoid;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .section-number {
+    width: 36px;
+    height: 36px;
+    background: #2B2420;
+    color: #F4EFE8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: #2B2420;
+  }
+
+  .section-time {
+    font-size: 12px;
+    color: #8B6F4E;
+    font-weight: 500;
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  .section-desc {
+    font-size: 14px;
+    color: #6B6055;
+    margin-bottom: 16px;
+    padding-left: 50px;
+  }
+
+  .steps { padding-left: 50px; list-style: none; }
+
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #F0E9DD;
+    font-size: 14px;
+  }
+
+  .step:last-child { border-bottom: none; }
+
+  .checkbox { display: none; }
+
+  .checkbox-label {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #D9CFBD;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .checkbox:checked + .checkbox-label {
+    background: #2B2420;
+    border-color: #2B2420;
+  }
+
+  .checkbox:checked + .checkbox-label::after {
+    content: '\2713';
+    color: #F4EFE8;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .checkbox:checked ~ .step-content {
+    opacity: 0.45;
+    text-decoration: line-through;
+    text-decoration-color: #D9CFBD;
+  }
+
+  .step-content { flex: 1; }
+  .step-content strong { color: #2B2420; }
+
+  .step-path {
+    display: inline-block;
+    background: #F4EFE8;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: #6B6055;
+    margin: 4px 0;
+  }
+
+  .step-note {
+    font-size: 13px;
+    color: #8A7E6E;
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  .link-box {
+    display: block;
+    background: #2B2420;
+    color: #F4EFE8;
+    text-align: center;
+    padding: 14px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    margin: 12px 0 4px 0;
+    word-break: break-all;
+  }
+
+  .link-box:hover { background: #3B3028; }
+
+  .link-label {
+    font-size: 11px;
+    color: #8B6F4E;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .divider {
+    height: 1px;
+    background: #E8E1D6;
+    margin: 36px 0;
+  }
+
+  .summary {
+    background: #F4EFE8;
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-top: 36px;
+  }
+
+  .summary h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+    font-size: 13px;
+  }
+
+  .summary-grid dt { color: #8A7E6E; }
+  .summary-grid dd { color: #2B2420; font-weight: 500; }
+
+  .footer {
+    text-align: center;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #E8E1D6;
+    font-size: 12px;
+    color: #8B6F4E;
+  }
+
+  .footer a { color: #2B2420; text-decoration: none; }
+
+  .portal-feature {
+    display: flex;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid #F0E9DD;
+    padding-left: 50px;
+  }
+
+  .portal-feature:last-child { border-bottom: none; }
+
+  .portal-icon {
+    width: 40px;
+    height: 40px;
+    background: #F4EFE8;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .portal-feature-content h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2B2420;
+    margin-bottom: 2px;
+  }
+
+  .portal-feature-content p {
+    font-size: 13px;
+    color: #6B6055;
+    line-height: 1.5;
+  }
+
+  .portal-highlight {
+    background: #2B2420;
+    color: #F4EFE8;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 16px 0 8px 50px;
+  }
+
+  .portal-highlight h4 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #8B6F4E;
+    margin-bottom: 10px;
+  }
+
+  .portal-highlight ol {
+    padding-left: 18px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #E8E1D6;
+  }
+
+  .portal-highlight ol strong { color: #F4EFE8; }
+
+  .credit-table {
+    margin-left: 50px;
+    margin-top: 12px;
+    font-size: 13px;
+    background: #FAF6EF;
+    border: 1px solid #E8E1D6;
+    border-radius: 6px;
+    padding: 16px 20px;
+    color: #4A4038;
+  }
+
+  .credit-table p { margin-bottom: 8px; }
+  .credit-table ul { padding-left: 20px; margin-top: 8px; }
+  .credit-table li { margin-bottom: 4px; }
+  .credit-table code {
+    background: #fff;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    color: #2B2420;
+  }
+
+  .page-break { page-break-before: always; }
+
+  @media print {
+    body { background: #fff; }
+    .page { padding: 0; }
+    .link-box { background: #2B2420 !important; }
+    .section-number { background: #2B2420 !important; color: #F4EFE8 !important; }
+    .portal-icon { background: #F4EFE8 !important; }
+    .portal-highlight { background: #2B2420 !important; color: #F4EFE8 !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-label">Social & Content Onboarding</div>
+    <h1>Welcome, Rick</h1>
+    <p>A few quick setup tasks and a walkthrough of your private client portal.</p>
+  </div>
+
+  <div class="intro">
+    Everything I'll run for Radius — Instagram and LinkedIn content, monthly shoots, approvals, reporting — runs through a few platforms that need your access, plus a private portal where you'll review and approve every post before it goes live. <strong>Steps 1-2 are one-time setup. Step 3 is your portal. Step 4 is our kickoff call.</strong>
+  </div>
+
+  <!-- STEP 1: Connect Platforms + Meta + LinkedIn -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">1</div>
+      <div class="section-title">Connect Your Social Platforms</div>
+      <div class="section-time">10 minutes</div>
+    </div>
+    <div class="section-desc">
+      Two things here. First, connect Instagram and LinkedIn to Zernio — the tool I use to schedule and publish your content. Then add me as an admin on Meta so I can manage @radiusmillwork directly for analytics and engagement.
+    </div>
+
+    <div style="padding-left: 50px;">
+      <div class="link-label">Your Zernio signup link</div>
+      <a class="link-box" href="https://zernio.com/signup" target="_blank">
+        zernio.com/signup
+      </a>
+      <div class="step-note">I'll send you a direct invite link by email — use that instead of the generic page if you have it.</div>
+    </div>
+
+    <ul class="steps" style="margin-top: 16px;">
+      <li class="step">
+        <input type="checkbox" class="checkbox" id="cb1"><label for="cb1" class="checkbox-label"></label>
+        <div class="step-content">
+          Create your Zernio account using <strong>rick@radiuswood.com</strong>
+        </div>
+      </li>
+      <li class="step">
+        <input type="checkbox" class="checkbox" id="cb2"><label for="cb2" class="checkbox-label"></label>
+        <div class="step-content">
+          Once logged in, click <strong>"Add Account"</strong> and connect <strong>Instagram</strong> (@radiusmillwork)
+          <div class="step-note">Log in with the Meta account that manages the Radius IG. You'll authorize read + publish access.</div>
+        </div>
+      </li>
+      <li class="step">
+        <input type="checkbox" class="checkbox" id="cb3"><label for="cb3" class="checkbox-label"></label>
+        <div class="step-content">
+          Click <strong>"Add Account"</strong> again and connect <strong>LinkedIn</strong> (the Radius Architectural Millwork company page)
+          <div class="step-note">LinkedIn is where we'll lean into the founder/shop voice — architects and builders live here.</div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="section-desc" style="margin-top: 20px; margin-bottom: 12px;">
+      <strong style="color: #2B2420;">Now add me to Meta Business Manager.</strong> Zernio handles scheduling, but I also need direct admin access for analytics, engagement, and troubleshooting.
+    </div>
+
+    <ul class="steps">
+      <li class="step">
+        <input type="checkbox" class="checkbox" id="cb4"><label for="cb4" class="checkbox-label"></label>
+        <div class="step-content">
+          Go to <strong>business.facebook.com</strong> and log in
+        </div>
+      </li>
+      <li class="step">
+        <input type="checkbox" class="checkbox" id="cb5"><label for="cb5" class="checkbox-label"></label>
+        <div class="step-content">
+          Navigate to:
+          <br><span class="step-path">Settings &rarr; People &rarr; Add People</span>
+        </div>
+      </li>
+      <li class="step">
+        <input type="checkbox" class="checkbox" id="cb6"><label for="cb6" class="checkbox-label"></label>
+        <div class="step-content">
+          Enter <strong>info@mattanthonyphoto.com</strong> and grant <strong>Admin access</strong>
+        </div>
+      </li>
+      <li class="step">
+        <input type="checkbox" class="checkbox" id="cb7"><label for="cb7" class="checkbox-label"></label>
+        <div class="step-content">
+          Click <strong>Send Invite</strong>
+          <div class="step-note">This doesn't give me access to your personal Facebook, only the business assets connected to @radiusmillwork.</div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="section-desc" style="margin-top: 20px; margin-bottom: 12px;">
+      <strong style="color: #2B2420;">And one more thing — LinkedIn company page admin.</strong>
+    </div>
+
+    <ul class="steps">
+      <li class="step">
+        <input type="checkbox" class="checkbox" id="cb8"><label for="cb8" class="checkbox-label"></label>
+        <div class="step-content">
+          On LinkedIn, go to the <strong>Radius Architectural Millwork</strong> company page as an admin
+        </div>
+      </li>
+      <li class="step">
+        <input type="checkbox" class="checkbox" id="cb9"><label for="cb9" class="checkbox-label"></label>
+        <div class="step-content">
+          Click <strong>Admin tools &rarr; Manage admins &rarr; Add admin</strong>, find <strong>Matt Anthony</strong>, grant <strong>Super admin</strong>
+          <div class="step-note">This lets me post from the company page directly if Zernio has a connection issue.</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- STEP 2: Project Credits -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">2</div>
+      <div class="section-title">Send the Project Credit List</div>
+      <div class="section-time">15 minutes</div>
+    </div>
+    <div class="section-desc">
+      This is the single biggest unlock for growing Radius's audience. Every post on Instagram and LinkedIn needs to credit the <strong>architect, interior designer, and builder</strong> you worked with. When we tag them, their followers see Radius, and the 675-follower count at @radiusmillwork starts solving itself.
+    </div>
+
+    <div class="credit-table">
+      <p><strong>For each of these past projects on radiuswood.com, please send me:</strong></p>
+      <ul>
+        <li>Architect name + IG handle (e.g. <code>@architectname</code>)</li>
+        <li>Interior designer name + IG handle (if one was involved)</li>
+        <li>Builder / GC name + IG handle</li>
+        <li>Photographer name + whether Radius has rights to repost</li>
+      </ul>
+      <p style="margin-top: 12px;">The projects:</p>
+      <ul>
+        <li>Walnut Estate</li>
+        <li>Lion's Bay Contemporary Walnut Estate</li>
+        <li>West Vancouver Modern Luxury Estate</li>
+        <li>Waterfront Anigre Penthouse</li>
+        <li>Whistler Slip Matched Oak</li>
+        <li>Vancouver Penthouse</li>
+        <li>Whitby Estates</li>
+        <li>2011 AWMAC Gold project with Lamoureux Architects (confirming: Brad Lamoureux?)</li>
+      </ul>
+      <p style="margin-top: 12px;">Reply to my welcome email with what you have — you can always follow up with the rest. Anything missing we'll cover on the kickoff call.</p>
+    </div>
+
+    <ul class="steps" style="margin-top: 16px;">
+      <li class="step">
+        <input type="checkbox" class="checkbox" id="cb10"><label for="cb10" class="checkbox-label"></label>
+        <div class="step-content">
+          Pull together what you have for the projects above and email it back
+          <div class="step-note">Fine to send in any format — a quick bulleted list by project is ideal.</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- STEP 3: Client Portal -->
+  <div class="section page-break">
+    <div class="section-header">
+      <div class="section-number">3</div>
+      <div class="section-title">Your Client Portal</div>
+    </div>
+    <div class="section-desc">
+      This is your private dashboard and the only thing you need to check regularly. Everything else runs in the background. <strong>Your one recurring task is reviewing posts in Approvals.</strong>
+    </div>
+
+    <div style="padding-left: 50px;">
+      <div class="link-label">Your portal</div>
+      <a class="link-box" href="https://portal.mattanthonyphoto.com" target="_blank">
+        portal.mattanthonyphoto.com
+      </a>
+      <div style="display: flex; gap: 24px; margin-top: 8px; font-size: 13px; color: #6B6055;">
+        <span><strong style="color:#2B2420;">Login:</strong> rick@radiuswood.com</span>
+        <span><strong style="color:#2B2420;">Password:</strong> [sent in email]</span>
+      </div>
+    </div>
+
+    <ul class="steps" style="margin-top: 20px;">
+      <li class="step">
+        <input type="checkbox" class="checkbox" id="cb11"><label for="cb11" class="checkbox-label"></label>
+        <div class="step-content">
+          Log in at <strong>portal.mattanthonyphoto.com</strong> and confirm you can see your dashboard
+        </div>
+      </li>
+    </ul>
+
+    <div style="padding-left: 50px; margin-top: 28px;">
+      <div class="link-label" style="margin-bottom: 12px;">The two pages you'll use most</div>
+    </div>
+
+    <div class="portal-feature">
+      <div class="portal-icon">&#9998;</div>
+      <div class="portal-feature-content">
+        <h4>Approvals</h4>
+        <p>Every Instagram and LinkedIn post I draft lands here before it goes live. You'll see the images, caption, and hashtags for each one. Three options: <strong>Approve</strong> if it's good to go, <strong>Request Revision</strong> with specific notes and I'll rebuild it, or <strong>Decline</strong> to start fresh. Nothing publishes without your sign-off.</p>
+      </div>
+    </div>
+
+    <div class="portal-feature">
+      <div class="portal-icon">&#128197;</div>
+      <div class="portal-feature-content">
+        <h4>Content Calendar</h4>
+        <p>A monthly view of every post — past and upcoming. Color-coded by status so you can see at a glance what's been published, what's scheduled, and what's waiting on your review. Click any post to see the full details.</p>
+      </div>
+    </div>
+
+    <div class="portal-highlight">
+      <h4>Your weekly rhythm</h4>
+      <ol>
+        <li>I draft your posts and they appear in <strong>Approvals</strong></li>
+        <li>You review each one, takes about <strong>5-10 minutes</strong> with a coffee</li>
+        <li><strong>Approve</strong> the ones that are good to go</li>
+        <li>If something feels off, hit <strong>Request Revision</strong> and tell me what to change, I'll rebuild it with your notes</li>
+        <li>Approved posts publish automatically on schedule</li>
+      </ol>
+    </div>
+
+    <div style="padding-left: 50px; margin-top: 28px;">
+      <div class="link-label" style="margin-bottom: 12px;">Also inside your portal</div>
+    </div>
+
+    <div class="portal-feature">
+      <div class="portal-icon">&#9633;</div>
+      <div class="portal-feature-content">
+        <h4>Dashboard</h4>
+        <p>Home screen with pending approvals, this month's stats, and your latest published posts.</p>
+      </div>
+    </div>
+
+    <div class="portal-feature">
+      <div class="portal-icon">&#128200;</div>
+      <div class="portal-feature-content">
+        <h4>Performance Reports</h4>
+        <p>Monthly analytics — reach, engagement, follower growth, top-performing posts. Curated highlights, not raw data.</p>
+      </div>
+    </div>
+
+    <div class="portal-feature">
+      <div class="portal-icon">&#128247;</div>
+      <div class="portal-feature-content">
+        <h4>Shoots &amp; Schedule</h4>
+        <p>Every monthly shoot we run — active and completed — with dates, shot lists, and deliverables.</p>
+      </div>
+    </div>
+
+    <div class="portal-feature">
+      <div class="portal-icon">&#128230;</div>
+      <div class="portal-feature-content">
+        <h4>Deliverables</h4>
+        <p>Your photo library. Browse, preview, and download full-resolution images from every shoot.</p>
+      </div>
+    </div>
+
+    <div class="portal-feature">
+      <div class="portal-icon">&#127912;</div>
+      <div class="portal-feature-content">
+        <h4>Brand Kit</h4>
+        <p>Your voice rules, vocabulary, hashtag strategy, and connected platforms — the playbook I follow.</p>
+      </div>
+    </div>
+
+    <div class="portal-feature">
+      <div class="portal-icon">&#128179;</div>
+      <div class="portal-feature-content">
+        <h4>Invoices</h4>
+        <p>Billing history, payment status, and downloadable invoices.</p>
+      </div>
+    </div>
+
+    <div class="step-note" style="padding-left: 50px; margin-top: 12px;">Works on your phone, the whole thing is built for thumbs.</div>
+  </div>
+
+  <!-- STEP 4: Kickoff Call -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">4</div>
+      <div class="section-title">Book Your Kickoff Call</div>
+      <div class="section-time">1 minute</div>
+    </div>
+    <div class="section-desc">
+      30-minute Zoom to lock voice, confirm the content pillars (The Craft, The Shop, The Install, The Team, The Finished), fill gaps in the project credit list, and schedule the first shop shoot. I'll come with a draft playbook already written — we're confirming and sharpening, not starting from scratch.
+    </div>
+    <div style="padding-left: 50px;">
+      <a class="link-box" href="https://api.leadconnectorhq.com/widget/booking/enp6ws53Ks3oceXUhRER" target="_blank">
+        Book Your Kickoff Call
+      </a>
+      <div class="step-note" style="text-align: center; margin-top: 8px;">Pick any time that works for you in Week 1 of May.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="summary">
+    <h3>Quick Reference</h3>
+    <dl class="summary-grid">
+      <dt>Your portal</dt>
+      <dd>portal.mattanthonyphoto.com</dd>
+      <dt>Portal login</dt>
+      <dd>rick@radiuswood.com</dd>
+      <dt>Term</dt>
+      <dd>May 1 → Jul 31, 2026</dd>
+      <dt>Monthly</dt>
+      <dd>$1,500 + GST = $1,575</dd>
+      <dt>Posting cadence</dt>
+      <dd>3-4/week (IG + LinkedIn)</dd>
+      <dt>Monthly shoot</dt>
+      <dd>One 2-3 hr session, your call on type</dd>
+      <dt>Monthly strategy call</dt>
+      <dd>20 min, Week 1 of each month</dd>
+      <dt>Fast contact</dt>
+      <dd>Text or email anytime</dd>
+    </dl>
+  </div>
+
+  <div class="footer">
+    <p>Matt Anthony Photography &nbsp;&middot;&nbsp; <a href="https://www.mattanthonyphoto.com">mattanthonyphoto.com</a> &nbsp;&middot;&nbsp; 604.765.9270</p>
+  </div>
+
+</div>
+</body>
+</html>
