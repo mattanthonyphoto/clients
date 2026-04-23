@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome, GD Nielsen Homes. Creative Partnership Guide.</title>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #FFFFFF;
+    --off-white: #FAFAF8;
+    --paper: #F4F1EB;
+    --ink: #1F2A2E;
+    --ink-deep: #14191C;
+    --brass: #8A7250;
+    --brass-light: #B59777;
+    --stone: #8A8579;
+    --light-stone: #C5C0B8;
+    --text: #4A4843;
+    --border: rgba(0,0,0,0.06);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { font-size:16px; scroll-behavior:smooth; }
+  body {
+    background:var(--white); color:var(--ink);
+    font-family:'DM Sans',sans-serif; font-weight:300;
+    line-height:1.8; overflow-x:hidden;
+  }
+
+  /* PROGRESS */
+  .progress {
+    position:fixed; top:0; left:0; height:2px; width:0%;
+    background:var(--brass); opacity:0.5; z-index:9999;
+    transition:width 0.06s linear;
+  }
+
+  /* LOADER */
+  .loader {
+    position:fixed; inset:0; background:var(--white); z-index:99999;
+    display:flex; align-items:center; justify-content:center;
+    transition:opacity 0.6s ease, visibility 0.6s;
+  }
+  .loader.done { opacity:0; visibility:hidden; pointer-events:none; }
+  .loader span {
+    font-family:'Josefin Sans',sans-serif; font-weight:300; font-size:0.6rem;
+    letter-spacing:0.5em; text-transform:uppercase; color:var(--ink);
+  }
+
+  /* REVEAL */
+  .r { opacity:0; transform:translateY(16px); transition:opacity 0.7s ease, transform 0.7s ease; }
+  .r.v { opacity:1; transform:none; }
+
+  /* HEADER */
+  .header-bar {
+    position:sticky; top:0; z-index:100;
+    padding:20px 5vw;
+    font-family:'Josefin Sans',sans-serif; font-weight:300; font-size:0.65rem;
+    letter-spacing:0.15em; text-transform:uppercase; color:var(--ink);
+    display:flex; justify-content:space-between; align-items:center;
+    background:rgba(255,255,255,0.94); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+  }
+  .header-bar em { font-style:normal; color:var(--stone); font-weight:200; }
+  .header-prepared {
+    font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:0.42rem;
+    letter-spacing:0.35em; text-transform:uppercase; color:var(--stone);
+  }
+  .header-cta {
+    font-family:'Josefin Sans',sans-serif; font-weight:400; font-size:0.4rem;
+    letter-spacing:0.25em; text-transform:uppercase; color:var(--white);
+    background:var(--ink); padding:8px 20px; text-decoration:none;
+    transition:background 0.3s ease;
+  }
+  .header-cta:hover { background:var(--brass); }
+
+  /* HERO */
+  .hero {
+    height:86vh; min-height:520px; position:relative; overflow:hidden;
+    display:flex; align-items:flex-end;
+  }
+  .hero img {
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    filter:brightness(0.5);
+  }
+  .hero-overlay {
+    position:relative; z-index:1; padding:8vh 5vw;
+    width:100%;
+    background:linear-gradient(transparent 0%, rgba(20,25,28,0.5) 100%);
+  }
+  .hero-eyebrow {
+    font-family:'Josefin Sans',sans-serif; font-weight:300; font-size:0.48rem;
+    letter-spacing:0.35em; text-transform:uppercase; color:var(--brass-light);
+    margin-bottom:20px;
+    opacity:0; animation:fadeIn 0.8s 0.3s ease forwards;
+  }
+  .hero h1 {
+    font-family:'Cormorant Garamond',serif; font-weight:300; color:var(--white);
+    font-size:clamp(2.6rem, 5vw, 4.2rem); line-height:1.08;
+    max-width:820px;
+    opacity:0; animation:fadeIn 0.8s 0.5s ease forwards;
+  }
+  .hero h1 em { font-style:italic; font-weight:400; }
+  .hero-sub {
+    margin-top:18px; font-size:0.88rem; color:rgba(246,244,240,0.62);
+    max-width:520px; line-height:1.8;
+    opacity:0; animation:fadeIn 0.8s 0.8s ease forwards;
+  }
+  @keyframes fadeIn { to { opacity:1; } }
+
+  /* SECTION BASE */
+  .section {
+    padding:10vh 5vw;
+    border-top:1px solid var(--border);
+  }
+  .section-inner { max-width:960px; margin:0 auto; }
+  .section-label {
+    font-family:'Josefin Sans',sans-serif; font-weight:300; font-size:0.44rem;
+    letter-spacing:0.35em; text-transform:uppercase; color:var(--stone);
+    margin-bottom:18px;
+  }
+  .section h2 {
+    font-family:'Cormorant Garamond',serif; font-weight:400;
+    font-size:2.4rem; line-height:1.15; margin-bottom:28px; color:var(--ink);
+    max-width:680px;
+  }
+  .section h2 em { font-style:italic; }
+  .section p {
+    font-size:0.9rem; color:var(--text); line-height:1.95; margin-bottom:16px;
+    max-width:620px;
+  }
+  .section p strong { color:var(--ink); font-weight:500; }
+
+  /* LETTER */
+  .letter {
+    padding:12vh 5vw 10vh;
+    background:var(--off-white);
+  }
+  .letter-inner { max-width:680px; margin:0 auto; }
+  .letter p {
+    font-size:0.95rem; color:var(--text); line-height:2.05; margin-bottom:20px;
+  }
+  .letter-sign {
+    margin-top:40px; font-family:'Cormorant Garamond',serif; font-style:italic;
+    font-size:1.3rem; color:var(--ink);
+  }
+  .letter-sign-name {
+    font-family:'DM Sans',sans-serif; font-style:normal; font-size:0.8rem;
+    color:var(--stone); letter-spacing:0.08em; margin-top:4px;
+  }
+
+  /* TEAM GRID */
+  .team-section { background:var(--paper); }
+  .team-block {
+    margin-top:32px;
+  }
+  .team-heading {
+    font-family:'Cormorant Garamond',serif; font-weight:400;
+    font-size:1.3rem; color:var(--ink); margin-bottom:20px;
+    padding-bottom:12px; border-bottom:1px solid var(--border);
+  }
+  .team-heading em { font-style:italic; color:var(--brass); }
+  .team-grid {
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+    gap:20px;
+  }
+  .team-card {
+    background:var(--white); padding:28px 24px;
+    border:1px solid var(--border);
+  }
+  .team-card-name {
+    font-family:'Cormorant Garamond',serif; font-weight:500; font-size:1.15rem;
+    color:var(--ink); margin-bottom:4px;
+  }
+  .team-card-role {
+    font-family:'Josefin Sans',sans-serif; font-size:0.42rem;
+    letter-spacing:0.25em; text-transform:uppercase; color:var(--brass);
+    margin-bottom:14px;
+  }
+  .team-card-bio {
+    font-size:0.82rem; color:var(--text); line-height:1.8;
+  }
+
+  /* ROADMAP */
+  .roadmap-grid {
+    display:grid; gap:24px; margin-top:32px;
+  }
+  .phase {
+    display:grid; grid-template-columns:140px 1fr; gap:32px;
+    padding:28px 0; border-top:1px solid var(--border);
+  }
+  .phase:first-child { border-top:none; padding-top:8px; }
+  .phase-time {
+    font-family:'Josefin Sans',sans-serif; font-weight:400; font-size:0.46rem;
+    letter-spacing:0.3em; text-transform:uppercase; color:var(--brass);
+    padding-top:4px;
+  }
+  .phase-content h3 {
+    font-family:'Cormorant Garamond',serif; font-weight:500; font-size:1.45rem;
+    color:var(--ink); margin-bottom:10px; line-height:1.25;
+  }
+  .phase-content h3 em { font-style:italic; }
+  .phase-content p {
+    font-size:0.85rem; color:var(--text); line-height:1.9; margin-bottom:12px;
+    max-width:580px;
+  }
+  .phase-list {
+    list-style:none; padding:0; margin-top:14px;
+  }
+  .phase-list li {
+    font-size:0.8rem; color:var(--text); padding:6px 0 6px 18px;
+    position:relative; line-height:1.7;
+  }
+  .phase-list li::before {
+    content:''; position:absolute; left:0; top:14px;
+    width:8px; height:1px; background:var(--brass);
+  }
+
+  /* RHYTHM */
+  .rhythm-section { background:var(--ink); color:var(--white); }
+  .rhythm-section .section-label { color:var(--brass-light); }
+  .rhythm-section h2 { color:var(--white); }
+  .rhythm-section p { color:rgba(246,244,240,0.7); }
+  .rhythm-grid {
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    gap:24px; margin-top:32px;
+  }
+  .rhythm-card {
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
+    padding:28px 24px;
+  }
+  .rhythm-card-cadence {
+    font-family:'Josefin Sans',sans-serif; font-size:0.42rem;
+    letter-spacing:0.3em; text-transform:uppercase; color:var(--brass-light);
+    margin-bottom:10px;
+  }
+  .rhythm-card-title {
+    font-family:'Cormorant Garamond',serif; font-weight:500; font-size:1.25rem;
+    color:var(--white); margin-bottom:12px;
+  }
+  .rhythm-card-title em { font-style:italic; }
+  .rhythm-card p {
+    font-size:0.8rem; color:rgba(246,244,240,0.62); line-height:1.8; margin:0;
+  }
+
+  /* APPROVAL CALLOUT */
+  .approval-callout {
+    margin-top:40px; padding:32px 36px;
+    background:rgba(201,169,110,0.08);
+    border-left:2px solid var(--brass);
+  }
+  .approval-callout h3 {
+    font-family:'Cormorant Garamond',serif; font-weight:500; font-size:1.3rem;
+    color:var(--ink); margin-bottom:12px;
+  }
+  .approval-callout h3 em { font-style:italic; }
+  .approval-callout ol {
+    list-style:none; counter-reset:step; padding:0;
+  }
+  .approval-callout ol li {
+    counter-increment:step; padding:10px 0 10px 40px;
+    position:relative; font-size:0.85rem; color:var(--text); line-height:1.8;
+  }
+  .approval-callout ol li::before {
+    content:counter(step); position:absolute; left:0; top:8px;
+    width:24px; height:24px; border-radius:50%;
+    background:var(--ink); color:var(--white);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Josefin Sans',sans-serif; font-size:0.6rem; font-weight:400;
+  }
+  .approval-callout strong { color:var(--ink); font-weight:500; }
+
+  /* KEY DATES TABLE */
+  .dates-section { background:var(--off-white); }
+  .dates-grid {
+    display:grid; grid-template-columns:1fr 1fr; gap:0;
+    margin-top:24px; border-top:1px solid var(--border);
+  }
+  .date-row {
+    display:contents;
+  }
+  .date-cell {
+    padding:20px 0; border-bottom:1px solid var(--border);
+    font-size:0.85rem;
+  }
+  .date-cell.date-when {
+    font-family:'Josefin Sans',sans-serif; font-weight:400; font-size:0.5rem;
+    letter-spacing:0.25em; text-transform:uppercase; color:var(--brass);
+    padding-right:24px;
+  }
+  .date-cell.date-what {
+    color:var(--text); line-height:1.8;
+  }
+  .date-cell.date-what strong { color:var(--ink); font-weight:500; }
+
+  /* FAQ */
+  .faq-section { background:var(--paper); }
+  .faq-grid {
+    display:grid; grid-template-columns:1fr 1fr; gap:32px 48px;
+    margin-top:36px;
+  }
+  .faq-item h4 {
+    font-family:'Cormorant Garamond',serif; font-weight:500; font-size:1.15rem;
+    color:var(--ink); margin-bottom:10px; line-height:1.3;
+  }
+  .faq-item p {
+    font-size:0.82rem; color:var(--text); line-height:1.85; margin:0;
+  }
+
+  /* PULLQUOTE */
+  .pullquote {
+    padding:12vh 5vw;
+    display:flex; flex-direction:column; align-items:center;
+    text-align:center;
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+    background:var(--white);
+  }
+  .pullquote::before {
+    content:''; display:block; width:32px; height:1px;
+    background:var(--brass); opacity:0.6; margin-bottom:28px;
+  }
+  .pullquote p {
+    font-family:'Cormorant Garamond',serif; font-style:italic;
+    font-size:1.6rem; line-height:1.55; color:var(--ink);
+    max-width:640px;
+  }
+  .pullquote cite {
+    margin-top:24px; font-style:normal;
+    font-family:'Josefin Sans',sans-serif; font-size:0.42rem;
+    letter-spacing:0.3em; text-transform:uppercase; color:var(--stone);
+  }
+
+  /* CTA */
+  .cta {
+    position:relative; overflow:hidden;
+    padding:16vh 5vw; color:var(--white);
+  }
+  .cta-bg {
+    position:absolute; inset:0;
+    background-image:url('https://images.squarespace-cdn.com/content/6824fd48afd1dd40cd73e146/4b9ec40a-fd39-4c41-b5bc-cc5f96976830/peak-ventures-whistler-9.jpg?content-type=image%2Fjpeg');
+    background-size:cover; background-position:center;
+    filter:brightness(0.18);
+  }
+  .cta-inner { position:relative; z-index:1; max-width:640px; margin:0 auto; }
+  .cta .section-label { color:var(--brass-light); margin-bottom:18px; }
+  .cta h2 {
+    font-family:'Cormorant Garamond',serif; font-weight:400;
+    font-size:2.4rem; line-height:1.15; margin-bottom:20px; color:var(--white);
+    max-width:560px;
+  }
+  .cta h2 em { font-style:italic; }
+  .cta p {
+    font-size:0.88rem; color:rgba(246,244,240,0.6); line-height:1.9; margin-bottom:32px;
+    max-width:520px;
+  }
+  .cta-buttons {
+    display:flex; gap:16px; flex-wrap:wrap; margin-top:8px;
+  }
+  .cta-btn {
+    font-family:'Josefin Sans',sans-serif; font-weight:400; font-size:0.5rem;
+    letter-spacing:0.3em; text-transform:uppercase;
+    padding:18px 38px; text-decoration:none; display:inline-block;
+    transition:all 0.3s ease;
+  }
+  .cta-btn-primary {
+    color:var(--ink); background:var(--brass);
+  }
+  .cta-btn-primary:hover { background:var(--white); }
+  .cta-btn-secondary {
+    color:var(--white); background:transparent;
+    border:1px solid rgba(255,255,255,0.3);
+  }
+  .cta-btn-secondary:hover { border-color:var(--brass); color:var(--brass); }
+  .cta-contact {
+    margin-top:52px; padding-top:32px;
+    border-top:1px solid rgba(201,169,110,0.15);
+  }
+  .cta-line { font-size:0.8rem; color:rgba(246,244,240,0.45); margin:3px 0; }
+  .cta-line a { color:var(--brass-light); text-decoration:none; }
+  .cta-line strong { color:var(--white); font-weight:400; margin-right:10px; }
+
+  /* FOOTER */
+  footer {
+    padding:28px 5vw;
+    font-family:'Josefin Sans',sans-serif; font-size:0.4rem;
+    letter-spacing:0.25em; text-transform:uppercase; color:var(--light-stone);
+    background:var(--ink-deep);
+    text-align:center;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width:900px) {
+    .phase { grid-template-columns:1fr; gap:8px; }
+    .phase-time { padding-top:0; }
+    .faq-grid { grid-template-columns:1fr; gap:28px; }
+    .dates-grid { grid-template-columns:1fr; }
+    .date-cell.date-when { padding-bottom:4px; border-bottom:none; }
+    .date-cell.date-what { padding-top:4px; padding-bottom:20px; }
+    .header-prepared { display:none; }
+  }
+  @media (max-width:768px) {
+    .header-bar { padding:16px 5vw; font-size:0.58rem; }
+    .hero { height:70vh; }
+    .hero h1 { font-size:2.2rem; }
+    .hero-sub { font-size:0.82rem; }
+    .section { padding:7vh 5vw; }
+    .section h2 { font-size:1.8rem; }
+    .letter { padding:7vh 5vw; }
+    .letter p { font-size:0.88rem; }
+    .pullquote { padding:7vh 5vw; }
+    .pullquote p { font-size:1.2rem; }
+    .cta { padding:8vh 5vw; }
+    .cta h2 { font-size:1.8rem; }
+    .approval-callout { padding:24px 22px; }
+    .progress { display:none; }
+  }
+  @media (max-width:480px) {
+    .hero { height:62vh; }
+    .hero h1 { font-size:1.85rem; }
+    .section h2 { font-size:1.55rem; }
+    .team-grid { grid-template-columns:1fr; }
+    .rhythm-grid { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="loader" id="loader"><span>Matt Anthony Photography</span></div>
+
+<div class="header-bar">
+  <span>Matt Anthony <em>Photography</em></span>
+  <span class="header-prepared">Prepared for GD Nielsen Homes</span>
+  <a class="header-cta" href="#next">Book Kickoff</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <img src="https://images.squarespace-cdn.com/content/v1/6824fd48afd1dd40cd73e146/e07b8aac-c1ec-4293-b956-79b41aa39f33/5322-backhouse-web-1.jpg" alt="The Perch, Sunshine Coast">
+  <div class="hero-overlay">
+    <div class="hero-eyebrow">Creative Partnership, Year One</div>
+    <h1>Welcome to the <em>partnership</em>, GD Nielsen.</h1>
+    <p class="hero-sub">A twelve month creative partnership built around the stories your projects tell. Here is how we will work together.</p>
+  </div>
+</div>
+
+<!-- LETTER -->
+<div class="letter r">
+  <div class="letter-inner">
+    <div class="section-label">A Note to the Team</div>
+    <p>To DK, Greg, Diane, Derek, and everyone on the GD Nielsen team,</p>
+    <p>Thank you for the trust. Forty years of building the homes that define North Vancouver is not a portfolio you hand to just anyone, and I do not take that lightly.</p>
+    <p>What we signed up for is more than a retainer. It is a year long partnership to translate the care you put into every home into the photography, story, and public record it deserves. A site that reads as carefully as the homes you build. Content that speaks to the clients you want next. Award submissions that get your work in front of the juries that matter. And a rhythm that runs quietly in the background so you can stay focused on building.</p>
+    <p>This guide is your orientation. It lays out who is doing what, how the year unfolds, and what rhythms to expect. Keep it bookmarked. Share it with anyone on the team who wants context.</p>
+    <p>My ask is small. Give the website discovery workshop sixty focused minutes this week, respond to approvals when they land in your portal, and tell me the moment something feels off. Everything else I will drive.</p>
+    <div class="letter-sign">
+      Looking forward to a great year,
+      <div class="letter-sign-name">Matt Anthony, Matt Anthony Photography</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT WE'RE BUILDING -->
+<div class="section r">
+  <div class="section-inner">
+    <div class="section-label">What We Are Building Together</div>
+    <h2>Year one, in <em>six deliverables</em></h2>
+    <p>The Creative Partner engagement is structured around six interlocking tracks. Each reinforces the others. Photography feeds the website, which feeds search visibility, which feeds inbound leads, which surface in new project shoots, which become the next publication pitch.</p>
+    <div class="roadmap-grid" style="margin-top:40px;">
+      <div class="phase">
+        <div class="phase-time">01<br>Website</div>
+        <div class="phase-content">
+          <h3>A rebuilt <em>gdnielsen.com</em></h3>
+          <p>Squarespace 7.1, custom designed and coded under your own Squarespace account. Live by May 21. Rolling monthly updates after launch are included in the retainer.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-time">02<br>Photography</div>
+        <div class="phase-content">
+          <h3>Two full day <em>portfolio shoots</em></h3>
+          <p>One every half year. Thirty to forty edited images each, full commercial license, Dropbox delivery within ten business days. Forested Family Estate kitchen anchors the first shoot in early May.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-time">03<br>Social</div>
+        <div class="phase-content">
+          <h3>Instagram and <em>Pinterest</em></h3>
+          <p>Fifty plus assets per quarter, scheduled through Zernio, approved through your portal. Pinterest carries the passive SEO load. Instagram carries the voice.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-time">04<br>SEO</div>
+        <div class="phase-content">
+          <h3>Monthly <em>search visibility</em></h3>
+          <p>Ongoing keyword monitoring, Google Business Profile optimization, and local SEO for North Vancouver and West Vancouver. Monthly reports land in your portal.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-time">05<br>Awards</div>
+        <div class="phase-content">
+          <h3>Publication and <em>award outreach</em></h3>
+          <p>Two award submissions and one coordinated publication campaign per year. Western Living, Dwell, Canadian Architect, Georgie Awards cycle. You pick the projects, I handle the submissions.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-time">06<br>Priority</div>
+        <div class="phase-content">
+          <h3>Priority <em>booking</em></h3>
+          <p>One to two week booking windows for any additional shoots beyond the two included. Monthly site visits available at preferred partner pricing. No end of year scramble when a project closes out.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- THE TEAM -->
+<div class="section team-section r">
+  <div class="section-inner">
+    <div class="section-label">The Team</div>
+    <h2>Who is <em>on point</em> for what</h2>
+    <p>Most engagements fail not because the work is bad but because nobody knows who owns what. Here is how the accountability splits, on both sides.</p>
+
+    <div class="team-block">
+      <div class="team-heading">Your <em>side</em></div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-card-name">DK Cheng</div>
+          <div class="team-card-role">Primary Contact &middot; Operations</div>
+          <div class="team-card-bio">Drives the day to day. Approvals, access, scheduling, the short loop on every question. If I only need one person to see something, it is DK.</div>
+        </div>
+        <div class="team-card">
+          <div class="team-card-name">Greg Nielsen</div>
+          <div class="team-card-role">Principal &middot; Final Approver</div>
+          <div class="team-card-bio">Looped in at milestone reviews. Website sign off, award category selection, publication targets. Welcome to approvals anytime in the portal.</div>
+        </div>
+        <div class="team-card">
+          <div class="team-card-name">Diane</div>
+          <div class="team-card-role">Team &middot; Creative Input</div>
+          <div class="team-card-bio">Voice in shoot planning and content direction. If there is a story we should be telling, Diane is the person to flag it.</div>
+        </div>
+        <div class="team-card">
+          <div class="team-card-name">Derek</div>
+          <div class="team-card-role">Team &middot; Visual Standards</div>
+          <div class="team-card-bio">Quality backstop on visual output. If something lands that feels off brand, Derek is the right person to push back.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-block" style="margin-top:48px;">
+      <div class="team-heading">Our <em>side</em></div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-card-name">Matt Anthony</div>
+          <div class="team-card-role">Photographer &middot; Creative Director</div>
+          <div class="team-card-bio">Every shoot, every publication pitch, every website decision runs through me. I am the single point of accountability for the engagement.</div>
+        </div>
+        <div class="team-card">
+          <div class="team-card-name">Sebastian Canon</div>
+          <div class="team-card-role">Second Shooter &middot; As Needed</div>
+          <div class="team-card-bio">Pulled in for larger projects where two cameras compress the shoot day. Brings his own gear.</div>
+        </div>
+        <div class="team-card">
+          <div class="team-card-name">Alena Machinskaia</div>
+          <div class="team-card-role">Editor &middot; Post Production</div>
+          <div class="team-card-bio">Colour and selection support that keeps turnarounds inside ten business days even in a busy season.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- THE ROADMAP -->
+<div class="section r">
+  <div class="section-inner">
+    <div class="section-label">Twelve Month Roadmap</div>
+    <h2>How the <em>year unfolds</em></h2>
+    <p>The year splits into four phases. Most of the heavy lifting happens in Phase 1. After that, the partnership settles into a predictable monthly cadence that runs alongside your construction calendar rather than competing with it.</p>
+
+    <div class="roadmap-grid" style="margin-top:40px;">
+      <div class="phase">
+        <div class="phase-time">Phase 1<br>May</div>
+        <div class="phase-content">
+          <h3>Foundation, and the <em>site launch</em></h3>
+          <p>The heaviest month. Website discovery, build, and launch compressed into thirty days. The first shoot happens in parallel.</p>
+          <ul class="phase-list">
+            <li>Website discovery workshop, week one</li>
+            <li>Information architecture, wireframes, visual direction signed off</li>
+            <li>Build begins week two, SEO foundation set by week three</li>
+            <li>Staging QA and pre launch sign off by week four</li>
+            <li>Forested Family Estate kitchen shoot, early May</li>
+            <li>gdnielsen.com live on May 21</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-time">Phase 2<br>Jun to Aug</div>
+        <div class="phase-content">
+          <h3>Rhythm, and <em>compounding reach</em></h3>
+          <p>The machine starts running. Monthly reporting lands in your portal. Social compounds. The first half year shoot is captured and spun into content.</p>
+          <ul class="phase-list">
+            <li>Instagram and Pinterest scaled to full cadence</li>
+            <li>Monthly SEO reports, keyword tracking begins</li>
+            <li>Google Business Profile claimed and optimised</li>
+            <li>First half year portfolio shoot completed</li>
+            <li>Rolling site updates as new projects close out</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-time">Phase 3<br>Sep to Dec</div>
+        <div class="phase-content">
+          <h3>Recognition, and <em>publication windows</em></h3>
+          <p>Fall is the planning window for award and publication cycles. We prepare GD Nielsen for the submission season that pays off in the following year.</p>
+          <ul class="phase-list">
+            <li>Georgie Awards category selection and submission prep</li>
+            <li>Publication campaign: Western Living, Dwell, Canadian Architect</li>
+            <li>Second half year portfolio shoot completed</li>
+            <li>Editorial content pushed into the year end slow season</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-time">Phase 4<br>Jan to Apr 2027</div>
+        <div class="phase-content">
+          <h3>Review, and <em>renewal</em></h3>
+          <p>Year one closes with a full accounting. We look at traffic, leads, award results, publication hits, and make the case for what year two should look like.</p>
+          <ul class="phase-list">
+            <li>Georgie Awards results and press coverage</li>
+            <li>Year one performance review, delivered in person</li>
+            <li>Renewal conversation, no auto renewal</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MONTHLY RHYTHM -->
+<div class="section rhythm-section r">
+  <div class="section-inner">
+    <div class="section-label">The Monthly Rhythm</div>
+    <h2>What every month <em>looks like</em></h2>
+    <p>Outside the big phase milestones, the monthly rhythm is the same. This is what GD Nielsen can count on, month in and month out.</p>
+
+    <div class="rhythm-grid">
+      <div class="rhythm-card">
+        <div class="rhythm-card-cadence">Weekly</div>
+        <div class="rhythm-card-title">Social <em>approvals</em></div>
+        <p>New posts land in your portal every Monday morning. You approve, revise, or decline directly in the portal. Approved posts publish automatically on schedule.</p>
+      </div>
+      <div class="rhythm-card">
+        <div class="rhythm-card-cadence">Monthly</div>
+        <div class="rhythm-card-title">SEO <em>report</em></div>
+        <p>First of every month. Keyword rankings, search visibility, Google Business Profile impressions, and the top three actions we are taking next.</p>
+      </div>
+      <div class="rhythm-card">
+        <div class="rhythm-card-cadence">Monthly</div>
+        <div class="rhythm-card-title">Site <em>updates</em></div>
+        <p>Rolling updates to the site as new projects close out or news breaks. One to two week booking window on any change request.</p>
+      </div>
+      <div class="rhythm-card">
+        <div class="rhythm-card-cadence">Quarterly</div>
+        <div class="rhythm-card-title">Strategy <em>call</em></div>
+        <p>Twenty minute check in with DK and, when relevant, Greg. Review what is working, adjust what is not, plan the next ninety days.</p>
+      </div>
+      <div class="rhythm-card">
+        <div class="rhythm-card-cadence">Half Yearly</div>
+        <div class="rhythm-card-title">Portfolio <em>shoot</em></div>
+        <p>Full day on site. Thirty to forty edited images delivered within ten business days. Full commercial license, no usage caps.</p>
+      </div>
+      <div class="rhythm-card">
+        <div class="rhythm-card-cadence">Annually</div>
+        <div class="rhythm-card-title">Publication <em>campaign</em></div>
+        <p>One coordinated push in the fall editorial planning window. Pitch development, editor outreach, follow through.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APPROVALS WORKFLOW -->
+<div class="section r">
+  <div class="section-inner">
+    <div class="section-label">How Approvals Work</div>
+    <h2>Nothing publishes <em>without your sign off</em></h2>
+    <p>Your portal is the single source of truth for approvals. Every social post, every piece of website copy, every award submission, every publication pitch flows through one consistent approval workflow. This is the loop that keeps the engagement humming.</p>
+
+    <div class="approval-callout">
+      <h3>The <em>weekly loop</em></h3>
+      <ol>
+        <li>I draft the week ahead and it appears in your portal under <strong>Approvals</strong>.</li>
+        <li>You open each item and see the full post, copy, and images. Takes five to ten minutes with a coffee.</li>
+        <li><strong>Approve</strong> the ones that are good to go. They publish on their scheduled date.</li>
+        <li>If something feels off, hit <strong>Request Revision</strong> and tell me what to change. I rebuild it with your notes.</li>
+        <li>If something is a hard no, hit <strong>Decline</strong> and I start fresh with a different angle.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!-- KEY DATES -->
+<div class="section dates-section r">
+  <div class="section-inner">
+    <div class="section-label">Key Dates, Year One</div>
+    <h2>The dates that <em>matter most</em></h2>
+    <div class="dates-grid">
+      <div class="date-cell date-when">Apr 21, 2026</div>
+      <div class="date-cell date-what"><strong>Contract signed.</strong> Signing invoice paid, engagement opens.</div>
+
+      <div class="date-cell date-when">This Week</div>
+      <div class="date-cell date-what"><strong>Website discovery workshop.</strong> Sixty minutes with DK, Greg welcome. The 30 day build clock starts the day we complete it.</div>
+
+      <div class="date-cell date-when">Early May</div>
+      <div class="date-cell date-what"><strong>First portfolio shoot.</strong> Forested Family Estate kitchen, anchoring year one.</div>
+
+      <div class="date-cell date-when">May 1, 2026</div>
+      <div class="date-cell date-what"><strong>Retainer begins.</strong> Monthly cadence opens across all six tracks.</div>
+
+      <div class="date-cell date-when">May 21, 2026</div>
+      <div class="date-cell date-what"><strong>gdnielsen.com live.</strong> The rebuilt site goes public. Staging sign off happens the week before.</div>
+
+      <div class="date-cell date-when">Jun 1, 2026</div>
+      <div class="date-cell date-what"><strong>First monthly invoice.</strong> $2,625 incl GST. Billing lands on the 1st each month through April 2027.</div>
+
+      <div class="date-cell date-when">Sept to Oct 2026</div>
+      <div class="date-cell date-what"><strong>Second portfolio shoot and publication campaign.</strong> Second half year shoot plus the fall editorial window.</div>
+
+      <div class="date-cell date-when">Apr 30, 2027</div>
+      <div class="date-cell date-what"><strong>Year one complete.</strong> Performance review and renewal conversation.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PULLQUOTE -->
+<div class="pullquote r">
+  <p>Forty years of building the homes that define North Vancouver. Year one of making sure the world sees them.</p>
+</div>
+
+<!-- FAQ -->
+<div class="section faq-section r">
+  <div class="section-inner">
+    <div class="section-label">The Questions You Might Have</div>
+    <h2>Frequently <em>asked</em></h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h4>How do we reach you between monthly calls?</h4>
+        <p>Text or email anytime. DK gets a direct line at 604.765.9270. Inside business hours I reply within a couple of hours. Outside hours, next morning. The portal captures everything that is not urgent so nothing slips.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Can we book shoots beyond the two included?</h4>
+        <p>Yes. Additional shoots are at preferred partner pricing, billed per project, with a one to two week booking window. Good candidates are award worthy projects closing out mid cycle or new builds that need marketing coverage.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Who owns the photography?</h4>
+        <p>You do, full commercial license on everything I deliver. No usage caps. Use it on the site, in ads, in printed material, submit it to publications, share it with collaborators. The only thing I retain is the right to include it in my own portfolio.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Who owns the rebuilt website?</h4>
+        <p>You do. It is created under your Squarespace account with dk@gdnielsen.com as the owner. I am a contributor with administrator access for the build and ongoing updates. You can remove me with two clicks any time.</p>
+      </div>
+      <div class="faq-item">
+        <h4>How do award submissions work?</h4>
+        <p>Two submissions per year are included in the retainer. You pick the categories and the projects. I handle the submission package, photography selection, copy, and follow up with the submission body. Additional submissions are billed at preferred partner rates.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What happens if a project we wanted to shoot is delayed?</h4>
+        <p>Shoots roll forward inside the contract year. If Forested Family Estate slips two months, the shoot moves two months. The two shoots per year commitment holds across the twelve month window, not the calendar.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What happens at the end of year one?</h4>
+        <p>We have a formal review conversation, usually in person. You see the full year, I make the case for year two, we decide together. There is no auto renewal. The contract has a clean stop unless both sides want to continue.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What about the build documentation books Diane mentioned?</h4>
+        <p>Not in year one scope, but on the menu. At roughly $7,000 per project, it is a separate deliverable we can add when a project is a clear candidate. Let us revisit after we have the first shoot under our belt.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta r" id="next">
+  <div class="cta-bg"></div>
+  <div class="cta-inner">
+    <div class="section-label">What Happens Next</div>
+    <h2>The website discovery workshop, <em>this week</em></h2>
+    <p>The single most important thing on your end is booking the discovery workshop. Sixty minutes, on a call or in person in North Vancouver. Greg is welcome. The thirty day website build clock starts the day we finish it, and we need the site live by May 21.</p>
+    <div class="cta-buttons">
+      <a class="cta-btn cta-btn-primary" href="https://api.leadconnectorhq.com/widget/booking/enp6ws53Ks3oceXUhRER" target="_blank">Book the Workshop</a>
+      <a class="cta-btn cta-btn-secondary" href="https://mattanthonyphoto.github.io/clients/gd-nielsen/onboarding.html" target="_blank">Setup Checklist</a>
+    </div>
+    <div class="cta-contact">
+      <p class="cta-line"><strong>Matt Anthony</strong><a href="mailto:info@mattanthonyphoto.com">info@mattanthonyphoto.com</a></p>
+      <p class="cta-line"><strong>Phone</strong>604.765.9270</p>
+      <p class="cta-line"><strong>Portal</strong><a href="https://portal.mattanthonyphoto.com">portal.mattanthonyphoto.com</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>Matt Anthony Photography &bull; Squamish, British Columbia &bull; Prepared for GD Nielsen Homes, April 2026</footer>
+
+<script>
+(function(){
+  setTimeout(function(){ document.getElementById('loader').classList.add('done'); }, 600);
+
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if(h > 0) document.getElementById('progress').style.width = (window.scrollY / h * 100) + '%';
+  });
+
+  var ro = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('v'); });
+  }, {threshold:0.05});
+  document.querySelectorAll('.r').forEach(function(el){ ro.observe(el); });
+})();
+</script>
+</body>
+</html>
